@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>pocket monsters mtg</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            max-width: 1800px;
+            margin: auto;
+        }
+
+        .card {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .card:hover {
+            transform: scale(1.04);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>pocket monsters mtg custom cube</h1>
+    <p class="subtitle">a cube that i made to learn to make custom sets and have fun with my friends. used a lot of art from old cards to speed things up. (fan project, not related to pokemon company at all.) VERY EARLY DESIGN/DRAFT PHASE</p>
+
+    <div class="card-grid" id="cardGrid"></div>
+
+    <div class="lightbox" id="lightbox">
+        <img id="largeCard" src="" alt="">
+    </div>
+
+    <script>
+
+        const cardGrid = document.getElementById("cardGrid");
+        const lightbox = document.getElementById("lightbox");
+        const largeCard = document.getElementById("largeCard");
+
+        const totalCards = 85;
+
+        for (let i = 1; i <= totalCards; i++) {
+
+            const number = String(i).padStart(3, "0");
+
+            const image = `files/${number}.png`;
+
+            const card = document.createElement("img");
+
+            card.src = image;
+            card.className = "card";
+            card.loading = "lazy";
+            card.alt = `Card ${number}`;
+
+            card.onclick = function() {
+                largeCard.src = image;
+                lightbox.classList.add("active");
+            };
+
+            cardGrid.appendChild(card);
+        }
+
+        lightbox.onclick = function() {
+            lightbox.classList.remove("active");
+        };
+
+    </script>
+
+</body>
+</html>
